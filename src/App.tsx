@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Technologies from "./components/Technologies";
 import FAQ from "./components/FAQ";
+import Footer from "./components/Footer";
 
 const dataPromise = async () =>{
   const res = await fetch("/data.json");
@@ -19,6 +20,7 @@ export default function App() {
         <Technologies data={dataPromise()}/>
       </Suspense>
       <FAQ/>
+      <Footer/>
     </>
   )
 }
