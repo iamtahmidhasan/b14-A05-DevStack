@@ -1,215 +1,56 @@
-# 🧱 A-5 Dev Stack Builder Website
+# DEV Stack
 
-## 📅 Deadlines
-- 60 Marks: 13th September, 2026 (11:59 PM ⏱️)
-- 50 Marks: No deadline for 50 marks.
-- 30 Marks: Any time after the 60 marks window.
+A web application that lets you explore technologies, browse their details, and build a personalized development stack.
 
----
+## Technologies
 
-## 🚫 Key Rules
-- Don't ask about mark distribution in the group. We don't provide it.
-- Don't post assignment feedback after you receive it. If you face any problem or have any complaints, join a support session and discuss it.
-- Don't use any lorem ipsum text, rather use relevant and meaningful text content.
-- You can change the color if you want, but remember that it should not be a gobindo color.
-- Use at least 8 git commits with meaningful messages.
+- React
+- TypeScript
+- Tailwind CSS
+- DaisyUI
+- React Toastify
+- Vite
 
+## Features
 
+- Browse a curated list of technologies with descriptions, ratings, and categories.
+- Add technologies to your personal stack with instant toast notifications and duplicate detection.
+- Manage your stack by removing individual items or clearing the entire stack at once.
 
----
+## Q&A
 
-## 🧩 Features & Requirements (50 Marks)
+**What is JSX, and why is it used in React?**
 
-### 🧭 Navbar
-- Navbar designed according to the UI.
-- Left: brand logo + "Dev Stack" name.
-- Center: nav links — Home, Technologies, Projects, About, Contact.
-- Right: "Sign In" (text button) and "Sign Up" (filled pill button).
-- Navbar stays sticky at the top while scrolling.
+JSX is a JavaScript syntax extension that lets you write HTML-like markup directly inside JavaScript code. It reads like the UI you are building and still has the full power of JavaScript. Under the hood, JSX gets compiled into `React.createElement()` calls that React renders to the DOM.
 
----
+**What is the difference between props and state?**
 
-### 🍔 Mobile Navbar
-- On small devices the navbar has three parts:
-  - Left: hamburger menu icon
-  - Center: brand logo
-  - Right: Sign In and Sign Up buttons
+Props are read-only data passed from a parent component to a child component. The child cannot change them. State is data that a component owns and manages itself, and it can change over time using setters like `setState`. When state changes, the component re-renders.
 
-![Hamburger menu](./ui/hamburger.png)
+**What does the useState hook do, and where did you use it in this project?**
 
----
+`useState` lets a component store and update local state. It returns an array with the current value and a function to update it. It was used in `Technologies.tsx` to manage the `stack` array, holding the technologies the user has added to their stack.
 
-### 🎯 Banner / Hero
-- Banner section includes:
-  - Heading (two-tone: plain text + gradient text)
-  - Description text
-  - Two buttons — "Explore Technologies" (gradient) and "Learn More" (outlined)
-  - Banner image
+**What does the useEffect hook do, and why did you need it to load the JSON data?**
 
----
+`useEffect` runs after the component renders and is used for side effects like fetching data, subscriptions, or updating the DOM. In this project, the JSON data is loaded without `useEffect`: the `use()` hook (React 19) consumes the promise passed from `App.tsx` inside a `<Suspense>` boundary, which handles the loading state automatically.
 
-### 📦 JSON Data
-Create 10-15 technology data with:
-- id
-- name
-- category (Frontend / Backend / Database / Language / Styling / DevOps / Tools)
-- description
-- icon (image URL)
-- rating (example: 4.8)
-- difficulty (Beginner-Friendly / Intermediate / Advanced)
-- badge (example: Popular, Fast, Essential, Containers)
+**Why does every item in a .map() list need a unique key prop?**
 
-**Example:**
+React uses the `key` prop to identify each item in a list so it can efficiently track which items were added, removed, or changed during re-renders. Without a stable key, React may reuse the wrong elements and cause rendering bugs. In `Technologies.tsx`, the tech cards use `slug` as the key and the stack items do too.
 
-```json
-[
-  {
-    "id": "react",
-    "name": "React",
-    "category": "Frontend",
-    "description": "A declarative, component-based JavaScript library for building modern user interfaces.",
-    "icon": "https://icon.icepanel.io/Technology/svg/React.svg",
-    "rating": 4.9,
-    "difficulty": "Beginner-Friendly",
-    "badge": "Popular"
-  },
-  {
-    "id": "postgresql",
-    "name": "PostgreSQL",
-    "category": "Database",
-    "description": "A powerful, open-source object-relational database system with proven reliability.",
-    "icon": "https://icon.icepanel.io/Technology/svg/PostgresSQL.svg",
-    "rating": 4.9,
-    "difficulty": "Intermediate",
-    "badge": "Top SQL"
-  }
-]
+**What is conditional rendering? Show one place you used it**
+
+Conditional rendering means rendering different UI based on a condition, for example with a ternary operator or `&&`. In `Technologies.tsx`, the "Your Stack" sidebar checks `stack.length === 0`: when the stack is empty it shows the "Your stack is empty." message, otherwise it lists the added technologies:
+
+```jsx
+{stack.length === 0 ? (
+  <p className="text-[10px] text-gray-400">Your stack is empty.</p>
+) : (
+  // ...list of added technologies
+)}
 ```
 
-🚩 You can take help of AI Systems for generating the JSON Data.
+**How do you pass data from a parent component to a child component, and how does a child send something back to the parent?**
 
-🚩 Load the data from the JSON file — do not hardcode the array inside the component.
-
----
-
-### 🃏 Technology Cards
-- Display all technologies in a 3-column layout (responsive: 1 column on mobile, 2 on tablet).
-- Each card includes:
-  - Icon
-  - Badge
-  - Name
-  - Description
-  - Category chip
-  - Difficulty
-  - Rating with a star
-  - "Add to Stack" button
-
----
-
-### 🧰 Your Stack Section (Sidebar)
-- A "Your Stack" panel sits beside the technology grid.
-- Shows a heading and the selected count — example: "2 Technology Selected".
-- By default the panel shows an empty message.
-
-| Empty state | With selected items |
-| --- | --- |
-| ![Your Stack empty](./ui/YourStack-without.png) | ![Your Stack with items](./ui/YourStack-with.png) |
-
----
-
-### ➕ Add to Stack Functionality
-- Clicking "Add to Stack" adds that technology to the "Your Stack" panel.
-- Each stack item shows: icon, name, category, and a remove (✕) button.
-- Stack layout: 1 column.
-- **The same technology cannot be added twice.** Trying again shows a warning alert.
-
-- Once added, that card's button becomes disabled and reads "✓ Added to Stack".
-
----
-
-### ❌ Remove Functionality
-- Clicking the ✕ button on a stack item removes only that item from the stack.
-- "Remove All" button clears the whole stack at once.
-
----
-
-### 🦶 Footer
-- Footer designed based on the UI.
-- Brand block: logo, name, short description, social links (GitHub, Twitter, LinkedIn).
-- Three link groups: Product, Company, Legal.
-- Bottom bar: copyright text + Privacy and Terms links.
-
----
-
-### 📱 Responsive Design
-- Fully responsive across mobile, tablet, and desktop.
-- Follow standard responsive practices.
-
----
-
-# 🚀 Challenges Part (10 Marks)
-
-### 🔔 Use a NPM Package React-Toastify
-- Use react-toastify to show alerts for: add to stack, duplicate add attempt, remove, and remove all.
-
----
-
-### ⏳ Loading State
-- Show a loading message/spinner while the JSON data is being fetched.
-- Note: since the JSON is a local file, the loading state may only be visible for a few milliseconds and can be hard to catch on screen. That is completely fine — the requirement is that the loading state exists and works, not that it stays visible for long.
-
----
-
-### 🎨 Gradient Brand Theme
-- Use one shared gradient (orange → pink → violet) for the brand name, hero heading highlight, and primary buttons.
-- Define the gradient in one place so the whole UI can be re-themed by changing a single value.
-
----
-
-### 📂 GitHub Repository
-- Create a beautiful GitHub Readme with the following description:
-  - Name of your project
-  - A little description
-  - Technology that you use
-  - 3 features about your project
-
-- Also answer these React questions at the end of your Readme (write the answers in your own words, short and simple):
-  1. What is JSX, and why is it used in React?
-  2. What is the difference between props and state?
-  3. What does the `useState` hook do, and where did you use it in this project?
-  4. What does the `useEffect` hook do, and why did you need it to load the JSON data?
-  5. Why does every item in a `.map()` list need a unique `key` prop?
-  6. What is conditional rendering? Show one place you used it (example: the empty stack message).
-  7. How do you pass data from a parent component to a child component, and how does a child send something back to the parent?
-
----
-
-## ⚙️ Technology You Can Use
-- React.js
-- Tailwind CSS, DaisyUI
-- TypeScript / JavaScript (ES6+)
-- React-Toastify (NPM Package)
-- JSON (for technology data)
-- Vite (build tool)
-
----
-
-## ❓ Common FAQ
-
-**1. Where can we deploy the site?**  
-Anywhere you like — Netlify, Vercel, Cloudflare Pages, or any other host. There is no fixed platform.
-
-**2. Do we have to use TypeScript?**  
-No. You can use TypeScript or JavaScript. If you want to build the whole project in plain JavaScript, that is completely fine.
-
-**3. Can we change the title, logo, and colors?**  
-Yes. The project title, logo, and color scheme are all yours to change — just keep them relevant to the project. Don't use random or gobindo colors and don't put an unrelated title/logo.
-
-**4. Where do we get the technology logos/icons?**  
-You can use image URLs from Google or from anywhere you like. A good source with clean, ready-to-use tech logos is <https://techicons.dev/> — copy the icon URL from there and put it in your JSON data.
-
----
-
-## 📤 What to submit:
-- GitHub Repository Link:
-- Live Site Link:
+A parent passes data down to a child through props. For example, `App.tsx` passes the JSON data promise to `Technologies` as a prop: `<Technologies data={dataPromise()} />`. To send data back up, the parent passes a callback function as a prop and the child calls it with the value it wants to send back. In this project, the stack state currently lives inside `Technologies`, so it manages its own updates without lifting state back to `App`.
