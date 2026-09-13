@@ -34,7 +34,7 @@ export default function Header() {
             <div className="flex btn-area gap-3 items-center">
           <button>Sign In</button>
 
-          <button className="bg-linear-65 from-orange-500 to-purple-500 px-4 py-2 text-white rounded-full">
+          <button className="bg-linear-65 from-orange-600 to-purple-600 px-4 py-2 text-white rounded-full">
             Sign Up
           </button>
         </div>
