@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Technologies from "./components/Technologies";
+import FAQ from "./components/FAQ";
 
 const dataPromise = async () =>{
   const res = await fetch("/data.json");
@@ -17,6 +18,7 @@ export default function App() {
       <Suspense fallback={<p>loading...</p>}>
         <Technologies data={dataPromise()}/>
       </Suspense>
+      <FAQ/>
     </>
   )
 }
