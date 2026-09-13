@@ -76,7 +76,7 @@ export default function Technologies({ data }: { data: Promise<Tech[]> }) {
           </div>
         </div>
         <div className="w-full md:w-[25%]">
-            <aside className="w-full lg:w-[250px] border border-gray-200 rounded-xl p-4 bg-white h-fit lg:sticky lg:top-24">
+            <aside className="w-full lg:w-[250px] border border-gray-200 rounded-xl p-4 bg-white h-fit md:sticky lg:top-24">
                 <h2 className="text-sm font-bold text-gray-800">Your Stack</h2>
                 <p className="text-[9px] text-gray-400 mt-1">{stack.length} Technologies Selected</p>
                 {stack.length === 0 ? (

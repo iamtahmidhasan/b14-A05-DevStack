@@ -5,7 +5,7 @@ export default function Hero() {
     <section className="w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 lg:py-20">
         
-        <div className="flex flex-col-reverse md:flex-row gap-10 lg:gap-16 items-center">
+        <div className="flex flex-col-reverse md:flex-row md:gap-10 lg:gap-16 items-center">
           
           {/* Text Area */}
           <div className="w-full md:w-1/2 flex flex-col justify-center">
