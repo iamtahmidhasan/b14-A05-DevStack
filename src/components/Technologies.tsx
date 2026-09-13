@@ -44,6 +44,12 @@ export default function Technologies({ data }) {
                 <div className="border border-dashed border-gray-200 rounded-lg mt-5 p-8 text-center">
                     <p className="text-[10px] text-gray-400">Your stack is empty.</p>
                     <p className="text-[8px] text-gray-300 mt-1">Add technologies to build your stack.</p>
+                    <div className="flex flex-col gap-2 mt-5">
+                        <div className="flex items-center gap-2 border border-gray-200 rounded-lg p-2">
+                            <img className="w-6 h-6 object-contain" src="" alt="" />
+                        </div>
+                        <button className="w-full mt-4 border border-red-200 text-red-500 text-[12px] font-semibold py-2 rounded-md hover:bg-red-50">Remove All</button>
+                    </div>
                 </div>
             </aside>
         </div>
