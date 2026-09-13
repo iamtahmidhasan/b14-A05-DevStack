@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function FAQ() {
   return (
     <section id="faq" className="max-w-6xl mx-auto px-4 py-12">
